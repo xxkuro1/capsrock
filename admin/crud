@@ -1,0 +1,149 @@
+<?php
+include ('database/db_connect.php');
+
+$request = 1;
+if(isset($_POST['request'])){
+    $request = $_POST['request'];
+}
+//data table
+## Read value
+if($request == 1){
+$draw = $_POST['draw'];
+$row = $_POST['start'];
+$rowperpage = $_POST['length']; // Rows display per page
+$columnIndex = $_POST['order'][0]['column']; // Column index
+$columnName = $_POST['columns'][$columnIndex]['data']; // Column name
+$columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
+$searchValue = mysqli_real_escape_string($conn,$_POST['search']['value']); // Search value
+
+## Search 
+$searchQuery = " ";
+if($searchValue != ''){
+	$searchQuery = " and (firstname like '%".$searchValue."%' or 
+        lastname like '%".$searchValue."%' or 
+        employee_id like'%".$searchValue."%' ) ";
+}
+
+## Total number of records without filtering
+$sel = mysqli_query($conn,"select count(*) as allcount from employees");
+$records = mysqli_fetch_assoc($sel);
+$totalRecords = $records['allcount'];
+
+## Total number of records with filtering
+$sel = mysqli_query($conn,"select count(*) as allcount from employees WHERE 1 ".$searchQuery);
+$records = mysqli_fetch_assoc($sel);
+$totalRecordwithFilter = $records['allcount'];
+
+## Fetch records
+$empQuery = "select * from employees WHERE 1 ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
+$empRecords = mysqli_query($conn, $empQuery);
+$data = array();
+
+while ($row = mysqli_fetch_assoc($empRecords)) {
+    //update button
+    $editButton =  "<button class='btn btn-sm btn-info updateUser' data-id='".$row['id']."' data-toggle='modal' data-target='#myModal'>Edit</button>";
+    //delete button
+    $deleteButton = "<button class='btn btn-sm btn-danger deleteUser' data-id='".$row['id']."'>Delete</button>";
+
+    $action = $editButton." ".$deleteButton;
+
+    $data[] = array(
+        
+    		"employee_id"=>$row['employee_id'],
+    		"firstname"=>$row['firstname'],
+    		"lastname"=>$row['lastname'],
+    		"address"=>$row['address'],
+            "birthdate"=>$row['birthdate'],
+            "contact"=>$row['contact'],
+            "gender"=>$row['gender'],
+            "action"=>$action
+         
+     
+
+        );
+        
+}
+
+## Response
+$response = array(
+    "draw" => intval($draw),
+    "iTotalRecords" => $totalRecords,
+    "iTotalDisplayRecords" => $totalRecordwithFilter,
+    "aaData" => $data
+    
+);
+
+echo json_encode($response);
+exit;
+}
+//save user
+if($request ==2){
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $address = $_POST['address'];
+    $birthdate = $_POST['birthdate'];
+    $contact = $_POST['contact'];
+    $gender = $_POST['gender'];
+
+    //create employee id
+    $letters = '';
+    $numbers = '';
+
+    foreach(range('A','Z')as $char){
+        $letters .=$char;
+    }
+    for ($i=0; $i < 10; $i++) { 
+        $numbers .=$i;
+    }
+    $employee_id = substr(str_shuffle($letters),0,3).substr(str_shuffle($numbers),0,9);
+
+    
+    $conn->query("INSERT INTO `employees`(`employee_id`, `firstname`, `lastname`, `address`, `birthdate`, `contact`, `gender`) VALUES ('$employee_id','$firstname','$lastname','$address','$birthdate','$contact','$gender')");
+    
+
+}
+
+
+//delete data
+if($request==2){
+    $id = 0;
+    $id = $_POST['id'];
+    
+    $conn->query("DELETE FROM employees WHERE id = '$id'");
+
+}
+
+//fetch user
+if($request == 3){
+    $id = 0;
+    
+    if(isset($_POST['id'])){
+        $id = mysqli_escape_string($conn,$_POST['id']);
+
+    }
+    $record = mysqli_query($conn,"SELECT * FROM employees WHERE id=".$id);
+    $response = array();
+    
+    if(mysqli_num_rows($records)>0){
+        $row =mysqli_fetch_assoc($record);
+        $response = array(
+            "employee_id"=>$row['employee_id'],
+    		"firstname"=>$row['firstname'],
+    		"lastname"=>$row['lastname'],
+    		"address"=>$row['address'],
+            "birthdate"=>$row['birthdate'],
+            "contact"=>$row['contact'],
+            "gender"=>$row['gender']
+
+        );
+        echo json_encode( array("status" => 1,"data" => $response) );
+        exit;
+        
+    }else{
+        echo json_encode( array("status" => 0) );
+        exit;
+    }
+}
+
+?>
+ 

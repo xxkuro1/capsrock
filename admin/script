@@ -1,0 +1,211 @@
+$(document).ready(function(){
+    $('#btn_update').hide();
+    
+    // DataTable
+    var userDataTable = $('#userTable').DataTable({
+        'processing': true,
+        'serverSide': true,
+        'serverMethod': 'post',
+        destroy:true,
+        'ajax': {
+            'url':'crud.php'
+        },
+        'columns': [
+            { data: 'employee_id' },
+            { data: 'firstname' },
+            { data: 'lastname' },
+            { data: 'address' },
+            { data: 'birthdate' },
+            { data: 'contact' },
+            { data: 'gender' },
+            {data: 'action'},
+        ]
+    });
+
+
+    // fetch record
+    $('#userTable').on('click','.updateUser',function(){
+        $('#btn_update').show();
+        $('#btn_save').hide();
+        var id = $(this).data('id');
+        
+        $('#txt_userid').val(id);
+        
+        // AJAX request
+        $.ajax({
+            
+            url: 'crud.php',
+            type: 'post',
+            data: 
+            {
+                request: 2, 
+                id: id
+            },
+            dataType: 'json',
+            success: function(response){
+               
+                if(response.status == 1){
+                   
+                    $('#employee_id').val(response.data.employee_id);
+                    $('#firstname').val(response.data.firstname);
+                    $('#lastname').val(response.data.lastname);
+                    $('#address').val(response.data.address);
+                    $('#birthdate').val(response.data.birthdate);
+                    $('#contact').val(response.data.contact);
+                    $('#gender').val(response.data.gender);
+                    $("#myModal").removeData("modal");
+                }else{
+                    alert("Invalid ID.");
+                }
+            }
+        });
+        
+    });//end  tag for fetch record
+
+
+    // update user 
+    $('#btn_update').click(function(){
+        var id = $('#txt_userid').val();
+       
+        var firstname = $('#firstname').val().trim();
+        var lastname = $('#lastname').val().trim();
+        var address = $('#address').val().trim();
+        var birthdate = $('#birthdate').val().trim();
+        var contact = $('#contact').val().trim();
+        var gender = $('#gender').val().trim();
+
+        if(firstname !='' && lastname != '' && address != ''){
+
+            // AJAX request
+            $.ajax({
+                url: 'crud.php',
+                type: 'post',
+                data: {request: 3, id: id,
+                    firstname: firstname,
+                     lastname: lastname,
+                      address: address, 
+                      birthdate: birthdate,
+                      contact: contact,
+                      gender: gender,
+                    },
+                dataType: 'json',
+                success: function(response){
+                    if(response.status == 1){
+                        alert(response.message);
+
+                        // Empty the fields
+                        $('#firstname','#lastname','#address','#birthdate','#contact').val('');
+                        $('#gender').val('');
+                        $('#txt_userid').val(0);
+
+                        // Reload DataTable
+                        userDataTable.ajax.reload();
+
+                        // Close modal
+                        $('#myModal').modal('toggle');
+                       
+                    }else{
+                        alert(response.message);
+                    }
+                }
+            });
+
+        }else{
+            alert('Please fill all fields.');
+        }
+    });
+
+
+    // Delete record
+    $('#userTable').on('click','.deleteUser',function(){
+        var id = $(this).data('id');
+
+        var deleteConfirm = confirm("Are you sure?");
+        if (deleteConfirm == true) {
+            // AJAX request
+            $.ajax({
+                url: 'crud.php',
+                type: 'post',
+                data: {request: 4, id: id},
+                success: function(response){
+
+                    if(response == 1){
+                        alert("Record deleted.");
+
+                        // Reload DataTable
+                        userDataTable.ajax.reload();
+                    }else{
+                        alert("Invalid ID.");
+                    }
+                    
+                }
+            });
+        } 
+        
+    });
+
+    //save
+    $('#btn_save').on('click',function(){
+        //validation
+       
+        
+        if($('#firstname').val() == "" || 
+            $('#lastname').val() == "" ||
+            $('#address').val() == "" || 
+            $('#birthdate').val()=="" ||
+            $('#contact').val()==""||
+            $('#gender').val() == ""
+            ){
+                alert("Please fill in all fields")
+        }
+         else{
+        //get data
+        $('#btn_update').hide();
+        var firstname = $('#firstname').val();
+        var lastname = $('#lastname').val();
+        var address = $('#address').val();
+        var birthdate = $('#birthdate').val();
+        var contact = $('#contact').val();
+        var gender = $('#gender').val();
+
+        
+        
+        //ajax
+        $.ajax({
+
+            url:'crud.php',
+            type:'POST',
+            data: {
+                request:5,
+                firstname: firstname,
+                lastname: lastname,
+                address: address,
+                birthdate: birthdate,
+                contact: contact,
+                gender: gender
+               
+            },
+            success: function(){
+                $('#firstname').val();
+                $('#lastname').val();
+                $('#address').val();
+                $('#birthdate').val();
+                $('#contact').val();
+                $('#gender').val();
+                alert("Data added successfully")
+                userDataTable.ajax.reload();
+                //clear data
+                $('#firstname').val('');
+                $('#lastname').val('');
+                $('#address').val('');
+                $('#birthdate').val('');
+                $('#contact').val('');
+                $('#gender').val('');
+            }
+        });// end tag for ajax
+    
+    
+    }
+
+    });//end tag for save data
+});
