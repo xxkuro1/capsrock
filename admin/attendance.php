@@ -8,12 +8,12 @@
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
  <!-- Custom styles for this template -->
-    <link href="../css/simple-sidebar.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet">
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/script.js"></script>
+ <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href='./DataTables/datatables.min.css' rel='stylesheet' type='text/css'>
+    <link href='DataTables/datatables.min.css' rel='stylesheet' type='text/css'>
     <script src="./js/datatables.net/js/jquery.dataTables.min.js" defer></script>
     
     
