@@ -28,7 +28,7 @@
   <div class="sidebar-heading">Admin </div>
   <div class="list-group list-group-flush">
     <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Attendance</a>
+    <a href="attendance/attendance.php" class="list-group-item list-group-item-action bg-light">Attendance</a>
     <div class="dropdown show">
       <a class="list-group-item list-group-item-action bg-light" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Employee
