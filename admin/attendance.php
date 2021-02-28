@@ -65,7 +65,7 @@
 
         <div class="container-fluid">
           
-            <h1 class="mt-4">Employee List</h1>
+            <h1 class="mt-4">Attendance List</h1>
            <!-- <button type="button" class="btn btn-info btn-lg" onclick="window.location.href='add_employee.php';">Add</button>
             -->
             <button type="button" class="btn btn-info btn-lg"  data-toggle="modal" data-target="#myModal">Add</button>
