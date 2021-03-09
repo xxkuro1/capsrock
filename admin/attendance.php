@@ -21,7 +21,7 @@
  <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/attendance.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href='DataTables/datatables.min.css' rel='stylesheet' type='text/css'>
     <script src="./js/datatables.net/js/jquery.dataTables.min.js" defer></script>
@@ -72,26 +72,25 @@
     
   </nav>
 	
-	sdasdsadsad
+	
         <div class="container-fluid">
           
             <h1 class="mt-4">Attendance List</h1>
            <!-- <button type="button" class="btn btn-info btn-lg" onclick="window.location.href='add_employee.php';">Add</button>
             -->
-            <button type="button" class="btn btn-info btn-lg"  data-toggle="modal" data-target="#myModal">Add</button>
+            <button type="button" class="btn btn-info btn-lg"  data-toggle="modal" data-target="#attendanceModal">Add</button>
         </div>
         &nbsp;
         
-        <table id='userTable' class='display dataTable' width='100%'>
+        <table id='attendanceTable' class='display dataTable' width='100%'>
           <thead>
             <tr>
                 <th>Employee ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Address</th> 
-                <th>Birthdate</th>
-                <th>Contact</th>
-                <th>Gender</th>
+                <th>Time in AM</th>
+                <th>Time out AM</th>
+                <th>Time in PM</th> 
+                <th>Time out PM</th>
+                <th>Total hours</th>
                 <th>Action</th>
                   
             </tr>
@@ -127,7 +126,7 @@
       }
     
         </script>
-        <?php include('myModal.php'); ?>
+          <?php include('attendanceModal.php'); ?>
         
 </body>
 </html> 
