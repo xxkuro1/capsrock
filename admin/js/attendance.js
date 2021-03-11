@@ -13,6 +13,7 @@ $(document).ready(function(){
         },
         'columns': [
             { data: 'emp_id' },
+            { data: 'date' },
             { data: 'timein_am' },
             {data: 'timeout_am'},
             {data: 'timein_pm'},

@@ -50,6 +50,7 @@ if($request == 1){
 
         $data[] = array(
             "emp_id"=>$row['emp_id'],
+            "date"=>$row['date'],
     		"timein_am"=>$row['timein_am'],
             "timeout_am"=>$row['timeout_am'],
             "timein_pm"=>$row['timein_pm'],
@@ -186,10 +187,11 @@ if($request ==5){
     $total_am=  abs($timeout_am_converted - $timein_am_converted)/3600;
     $total_pm=  abs($timeout_pm_converted - $timein_pm_converted)/3600;
     $total_hrs = $total_am + $total_pm;
-   
+    
 
     
-    $conn->query("INSERT INTO `attendance`(`emp_id`,`timein_am`,`timeout_am`,`timein_pm`,`timeout_pm`,`total_hrs`)VALUES ('$emp_id','$timein_am','$timeout_am','$timein_pm','$timeout_pm','$total_hrs')");
+    $conn->query("INSERT INTO `attendance`(`emp_id`,`timein_am`,`timeout_am`,`timein_pm`,`timeout_pm`,`total_hrs`)VALUES 
+    ('$emp_id','$timein_am','$timeout_am','$timein_pm','$timeout_pm','$total_hrs')");
 
     // $total_am=  abs($timeout_am - $timein_am)/3600;
    // $total_pm= strtotime($timeout_pm)-strtotime($timein_pm);

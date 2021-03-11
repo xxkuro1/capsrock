@@ -86,6 +86,7 @@
           <thead>
             <tr>
                 <th>Employee ID</th>
+                <th>Date</th>
                 <th>Time in AM</th>
                 <th>Time out AM</th>
                 <th>Time in PM</th> 
