@@ -46,12 +46,13 @@
             <script>
         //reset modal
         function resetModal (){
+                $('#emp_id').val('');
                 $('#timein_am').val('');
                 $('#timeout_am').val('');
                 $('#timein_pm').val('');
                 $('#timeout_pm').val('');
-                $('#btn_update_schedule').hide();
-                $('#btn_save_schedule').show();
+                $('#btn_update_attendance').hide();
+                $('#btn_save_attendance').show();
                
   }
       </script>

@@ -21,7 +21,7 @@
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/payroll.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href='DataTables/datatables.min.css' rel='stylesheet' type='text/css'>
     <script src="./js/datatables.net/js/jquery.dataTables.min.js" defer></script>
@@ -50,7 +50,7 @@
     <a class="dropdown-item" href="schedule.php">Schedule</a>
   </div>
 </div>
-    <a href="payroll.php" class="list-group-item list-group-item-action bg-light">Payroll</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">Payroll</a>
     <a href="logout.php" class="list-group-item list-group-item-action bg-light">Logout</a>
   </div>
 </div>
@@ -75,24 +75,19 @@
 
         <div class="container-fluid">
           
-            <h1 class="mt-4">Employee List</h1>
-           <!-- <button type="button" class="btn btn-info btn-lg" onclick="window.location.href='add_employee.php';">Add</button>
-            -->
-            <button type="button" class="btn btn-info btn-lg"  data-toggle="modal" data-target="#myModal">Add</button>
+            <h1 class="mt-4">Payroll</h1>
+          
+         
         </div>
         &nbsp;
         
-        <table id='userTable' class='display dataTable' width='100%'>
+        <table id='payrollTable' class='display dataTable' width='100%'>
           <thead>
             <tr>
                 <th>Employee ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Address</th> 
-                <th>Birthdate</th>
-                <th>Contact</th>
-                <th>Gender</th>
-                <th>Action</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Gross Pay</th>
                   
             </tr>
 
@@ -100,7 +95,7 @@
          
               
         </table>
-        
+       
         </div>
         <!-- /#page-content-wrapper -->
 
@@ -127,7 +122,7 @@
       }
     
         </script>
-        <?php include('myModal.php'); ?>
+        <?php include('positionModal.php'); ?>
         
 </body>
 </html> 

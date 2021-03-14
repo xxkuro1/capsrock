@@ -41,7 +41,7 @@
     <a class="dropdown-item" href="schedule.php">Schedule</a>
   </div>
 </div>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Payroll</a>
+    <a href="payroll.php" class="list-group-item list-group-item-action bg-light">Payroll</a>
     <a href="logout.php" class="list-group-item list-group-item-action bg-light">Logout</a>
   </div>
 </div>
