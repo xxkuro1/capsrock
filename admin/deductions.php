@@ -21,7 +21,7 @@
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/position.js"></script>
+    <script src="js/deductions.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href='DataTables/datatables.min.css' rel='stylesheet' type='text/css'>
     <script src="./js/datatables.net/js/jquery.dataTables.min.js" defer></script>
@@ -84,17 +84,17 @@
 
         <div class="container-fluid">
           
-            <h1 class="mt-4">Position</h1>
-            <button type="button" class="btn btn-info btn-lg"  data-toggle="modal" data-target="#positionModal">Add</button>
+            <h1 class="mt-4">Deductions</h1>
+            <button type="button" class="btn btn-info btn-lg"  data-toggle="modal" data-target="#deductionsModal">Add</button>
          
         </div>
         &nbsp;
         
-        <table id='positionTable' class='display dataTable' width='100%'>
+        <table id='deductionsTable' class='display dataTable' width='100%'>
           <thead>
             <tr>
-                <th>Position</th>
-                <th>Rate</th>
+                <th>Description</th>
+                <th>Amount</th>
                 <th>Action</th>
                   
             </tr>
@@ -130,7 +130,7 @@
       }
     
         </script>
-        <?php include('positionModal.php'); ?>
+        <?php include('deductionsModal.php'); ?>
         
 </body>
 </html> 

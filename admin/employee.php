@@ -44,13 +44,22 @@
       Employee
       </a>
 
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
     <a class="dropdown-item" href="employee.php">Employee List</a>
     <a class="dropdown-item" href="position.php">Position</a>
     <a class="dropdown-item" href="schedule.php">Schedule</a>
   </div>
+    </div>
+  <div class="dropdown show">
+      <a class="list-group-item list-group-item-action bg-light" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Payroll
+      </a>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="payroll.php">Payroll List</a>
+    <a class="dropdown-item" href="deductions.php">Deductions</a>
 </div>
-    <a href="payroll.php" class="list-group-item list-group-item-action bg-light">Payroll</a>
+</div>
+    
     <a href="logout.php" class="list-group-item list-group-item-action bg-light">Logout</a>
   </div>
 </div>

@@ -37,9 +37,12 @@ if($request == 1){
     ## Fetch records
     //$empQuery = "select * from attendance WHERE 1 ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
     $empQuery = "SELECT a.emp_id,e.firstname,e.lastname,a.total_hrs * p.rate 'Gross' FROM attendance a LEFT JOIN employees e 
-    ON a.emp_id = e.employee_id INNER JOIN position p ON e.position_id = p.id";
+    ON a.emp_id = e.employee_id ".$searchQuery." INNER JOIN position p ON e.position_id = p.id";
     $empRecords = mysqli_query($conn, $empQuery);
     $data = array();
+    //deductions
+    $empQuery2 ="SELECT SUM(amount) from deductions";
+
 
     while ($row = mysqli_fetch_assoc($empRecords)) {
 
