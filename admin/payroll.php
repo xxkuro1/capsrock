@@ -95,7 +95,7 @@
                 <th>FirstName</th>
                 <th>LastName</th>
                 <th>Gross Pay</th>
-                  
+                <th>Net Pay</th>
             </tr>
 
           </thead>

@@ -12,7 +12,8 @@ $(document).ready(function(){
             { data: 'emp_id' },
             { data: 'firstname'},
             { data: 'lastname'},
-            {data: 'Gross'}
+            {data: 'Gross'},
+            {data:'netPay'}
         ]
     });
 

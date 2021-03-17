@@ -40,19 +40,22 @@ if($request == 1){
     ON a.emp_id = e.employee_id ".$searchQuery." INNER JOIN position p ON e.position_id = p.id";
     $empRecords = mysqli_query($conn, $empQuery);
     $data = array();
-    //deductions
-    $empQuery2 ="SELECT SUM(amount) from deductions";
-
-
+    
+    
     while ($row = mysqli_fetch_assoc($empRecords)) {
-
-       
+        //deductions
+        $empQuery2 ="SELECT SUM(amount) AS 'amount' from deductions";
+        $empDeductions = $conn->query($empQuery2);
+        $empDeduc = $empDeductions->fetch_assoc();
+        $netPay = $row['Gross'] - $empDeduc['amount'];
+         
 
         $data[] = array(
             "emp_id"=>$row['emp_id'],
             "firstname"=>$row['firstname'],
     		"lastname"=>$row['lastname'],
-            "Gross"=>$row['Gross']
+            "Gross"=>$row['Gross'],
+            "netPay"=>[$netPay]
             );
     }
 
