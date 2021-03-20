@@ -155,6 +155,7 @@ $('#btn_save_attendance').on('click',function(){
             alert("Please fill in all fields")
     }
      else{
+         
     //get data
     $('#btn_update_attendance').hide();
     var emp_id = $('#emp_id').val();

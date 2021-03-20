@@ -83,11 +83,18 @@
 
 
         <div class="container-fluid">
-          
+        <h1>add feature, pagination and live search</h1>
             <h1 class="mt-4">Payroll</h1>
         </div>
         &nbsp;
-        
+        <label> From</label>
+        <input type="date" class="form-data" id="from">
+
+        <label> To</label>
+       
+        <input type="date" class="form-data" id="to">
+        <button type="button" class="btn btn-success btn-sm" id="btn_apply">Apply</button>
+      <!--
         <table id='payrollTable' class='display dataTable' width='100%'>
           <thead>
             <tr>
@@ -101,9 +108,30 @@
           </thead>
          
               
+        </table> 
+        -->
+
+        <table class='display dataTable' id width='100%'>
+       <!-- <input type="text" name="search_box" id="search_box" class="form-data" placeholder="Type your search query here" /> -->
+          <thead>
+         
+            <tr>
+                <th>Employee ID</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Gross Pay</th>
+                <th>Net Pay</th>
+          
+            </tr>
+            
+
+          </thead>
+          <tbody id="response">
+          </tbody>
+          
+              
         </table>
        
-        </div>
         <!-- /#page-content-wrapper -->
 
         </div>
