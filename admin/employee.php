@@ -57,6 +57,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
     <a class="dropdown-item" href="payroll.php">Payroll List</a>
     <a class="dropdown-item" href="deductions.php">Deductions</a>
+    <a class="dropdown-item" href="cashadvance.php">Cash Advance</a>
 </div>
 </div>
     

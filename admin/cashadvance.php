@@ -21,7 +21,7 @@
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/schedule.js"></script>
+    <script src="js/cashadvance.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href='DataTables/datatables.min.css' rel='stylesheet' type='text/css'>
     <script src="./js/datatables.net/js/jquery.dataTables.min.js" defer></script>
@@ -85,21 +85,21 @@
 
         <div class="container-fluid">
           
-            <h1 class="mt-4">Schedule</h1>
-            <button type="button" class="btn btn-info btn-lg"  data-toggle="modal" data-target="#scheduleModal">Add</button>
+            <h1 class="mt-4">Cash Advance</h1>
+            <button type="button" class="btn btn-info btn-lg"  data-toggle="modal" data-target="#cashadvanceModal">Add</button>
          
         </div>
         &nbsp;
         
-        <table id='scheduleTable' class='display dataTable' width='100%'>
+        <table id='cashadvanceTable' class='display dataTable' width='100%'>
           <thead>
             <tr>
-                <th>Time in AM </th>
-                <th>Time Out AM</th>
-                <th>Time In PM</th>
-                <th>Time Out PM</th>
-                <th>Action</th>
-                  
+                <th>Date</th>
+                <th>Employee ID</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Amount</th>
+                <th>Tools</th>
             </tr>
 
           </thead>
@@ -133,7 +133,7 @@
       }
     
         </script>
-        <?php include('scheduleModal.php'); ?>
+        <?php include('cashadvanceModal.php'); ?>
         
 </body>
 </html> 
