@@ -129,12 +129,27 @@ if (isset($_POST['request'])) {
     $query =  $conn->query("SELECT a.emp_id,e.firstname,e.lastname,SUM(total_hrs) * p.rate 'Gross' FROM attendance a LEFT JOIN employees e 
     ON a.emp_id = e.employee_id INNER JOIN position p ON e.position_id = p.id 
      WHERE date BETWEEN '$from' AND '$to' GROUP BY a.emp_id");
+
     while($fetch = $query->fetch_array()){
+        $empid = $fetch['emp_id'];
+
+        //cash advance
+         $caQuery= "SELECT SUM(amount) AS 'Amount' FROM cashadvance WHERE emp_id = '$empid' GROUP BY emp_id";
+         $caDeductions = $conn->query($caQuery);
+         $ca = $caDeductions->fetch_assoc();
+         $cashadbans = $ca['Amount'];
+
          //deductions
          $empQuery2 ="SELECT SUM(amount) AS 'amount' from deductions";
          $empDeductions = $conn->query($empQuery2);
          $empDeduc = $empDeductions->fetch_assoc();
-         $netPay = $fetch['Gross'] - $empDeduc['amount'];
+         $total_deductions = $empDeduc['amount'] + $ca['Amount'];
+         //$netPay = $fetch['Gross'] - $empDeduc['amount'];
+         $gross = $fetch['Gross'];
+         $netPay = $gross - $total_deductions;
+
+         
+
 
         echo"
         <tr>
