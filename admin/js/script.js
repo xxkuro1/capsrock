@@ -15,14 +15,16 @@ $(document).ready(function(){
             { data: 'employee_id' },
             { data: 'firstname' },
             { data: 'lastname' },
-            { data: 'address' },
-            { data: 'birthdate' },
             { data: 'contact' },
-            { data: 'gender' },
             {data: 'action'}
         ]
     });
 
+    //fetch position and schedule
+    $('#userTable').on('click','.changeUser',function(){
+        var id = $(this).data('id');
+        $('#txt_id').val(id);
+    })//end tag
 
     // fetch record
     $('#userTable').on('click','.updateUser',function(){
@@ -57,8 +59,14 @@ $(document).ready(function(){
                     $('#update_sss').val(response.data.update_sss);
                     $('#update_philhealth').val(response.data.update_philhealth);
                     $('#update_gender').val(response.data.update_gender);
-                    $('#position_val').val(response.data.position_val);
+                    $('#update_position').val(response.data.update_position);
+                    $('#timein_am').val(response.data.timein_am);
+                    $('#timeout_am').val(response.data.timeout_am);
+                    $('#timein_pm').val(response.data.timein_pm);
+                    $('#timeout_pm').val(response.data.timeout_pm);
                     $("#updateModal").removeData("modal");
+                    
+                    
                 }else{
                     alert("Invalid ID.");
                 }
@@ -97,7 +105,7 @@ $(document).ready(function(){
                 success: function(response){
                     if(response.status == 1){
                         alert(response.message);
-
+                        
                         // Empty the fields
                         $('#update_firstname','#update_lastname','#update_address','#update_birthdate','#update_contact').val('');
                         $('#update_gender').val('');
@@ -119,6 +127,50 @@ $(document).ready(function(){
             alert('Please fill all fields.');
         }
     });//end  tag for update
+
+
+    //update position and schedule
+    $('#btn_update_change').click (function(){
+        
+        var id = $('#txt_id').val();
+        var position = $('#position_val').val();
+        var am_schedule = $('#update_schedule_am').val();
+
+        
+      
+        if(position !='' || $am_schedule != ''){
+        $.ajax({
+            url:'crud.php',
+            type:'post',
+            data:{
+                request: 6,
+                id: id,
+                position: position,
+                am_schedule:am_schedule
+        
+            },  
+            dataType:'json',
+            success: function(response){
+                if(response.status ==1){
+                    alert(response.message);
+                    
+                   // $('#update_position').val();
+                   
+
+                    userDataTable.ajax.reload();
+                }
+                else{
+                    alert(response.message);
+                }
+            }
+
+
+        })
+    }else{
+        alert('Please fill in all fields');
+    }
+
+    })//end tag
 
 
     // Delete record

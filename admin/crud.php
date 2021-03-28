@@ -46,19 +46,17 @@ if($request == 1){
         // Update Button
         $updateButton = "<button class='btn btn-sm btn-info updateUser' data-id='".$row['id']."' data-toggle='modal' data-target='#updateModal' >Update</button>";
 
+        $positionAndSched  ="<button class='btn btn-sm btn-info changeUser' data-id='".$row['id']."' data-toggle='modal' data-target='#changeModal'>Change</button>";
         // Delete Button
         $deleteButton = "<button class='btn btn-sm btn-danger deleteUser' data-id='".$row['id']."'>Delete</button>";
         
-        $action = $updateButton." ".$deleteButton;
+        $action = $updateButton." ".$deleteButton." ".$positionAndSched;
 
         $data[] = array(
             "employee_id"=>$row['employee_id'],
     		"firstname"=>$row['firstname'],
     		"lastname"=>$row['lastname'],
-    		"address"=>$row['address'],
-            "birthdate"=>$row['birthdate'],
             "contact"=>$row['contact'],
-            "gender"=>$row['gender'],
                 "action" => $action
             );
     }
@@ -84,8 +82,9 @@ if($request == 2){
     }
 
     //$record = mysqli_query($conn,"SELECT * FROM employees LEFT JOIN position ON employees.position_id = position.id");
-    $record = mysqli_query($conn,"SELECT employees.employee_id,employees.firstname,employees.lastname,employees.address,employees.birthdate,employees.contact,employees.pagibig,employees.sss,employees.philhealth,employees.gender,position.position 
-    FROM employees INNER JOIN position ON employees.position_id = position.id WHERE employees.id=".$id); 
+    $record = mysqli_query($conn,"SELECT employees.employee_id,employees.firstname,employees.lastname,employees.address,employees.birthdate,employees.contact,employees.pagibig,employees.sss,employees.philhealth,employees.gender,position.position,s.timein_am,s.timeout_am,s.timein_pm,s.timeout_pm 
+    FROM employees LEFT JOIN position ON employees.position_id = position.id INNER JOIN schedules s 
+    ON employees.schedule_id = s.id WHERE employees.id=".$id); 
     $response = array();
 
     if(mysqli_num_rows($record) > 0){
@@ -102,7 +101,11 @@ if($request == 2){
             "update_contact" => $row['contact'],
             "update_philhealth" => $row['philhealth'],
             "update_gender" => $row['gender'],
-            "position_val" => $row['position']
+            "update_position" => $row['position'],
+            "timein_am" => $row['timein_am'],
+            "timeout_am" => $row['timeout_am'],
+            "timein_pm" => $row['timein_pm'],
+            "timeout_pm" => $row['timeout_pm']
         );
 
         echo json_encode( array("status" => 1,"data" => $response) );
@@ -148,6 +151,34 @@ if($request == 3){
         exit;
     }
 }
+
+//update position and schedule
+
+if($request ==6){
+    $id = 0;
+    if(isset($_POST['id'])){
+        $id = mysqli_escape_string($conn,$_POST['id']);
+    }
+    
+    $record = mysqli_query($conn,"SELECT id from employees WHERE id =".$id);
+    if(mysqli_num_rows($record) > 0){
+        $position = mysqli_escape_string($conn,$_POST['position']);
+        $am_schedule=mysqli_escape_string($conn,$_POST['am_schedule']);
+       
+
+        if($position !='' || $am_schedule != '' || $pm_schedule != ''){
+            mysqli_query($conn,"UPDATE `employees` SET `position_id`='".$position."', `schedule_id`='".$am_schedule."' WHERE `id` =".$id);
+            echo json_encode( array("status" => 1,"message" => "Record updated.") );
+            exit;
+        }
+        else{
+            echo json_encode( array("status" => 0,"message" => "Please fill all fields.") );
+            exit;
+        }
+       
+    }
+}
+
 
 // Delete User
 if($request == 4){
@@ -204,6 +235,7 @@ if($request ==5){
     
 
 }
+
 
 
 

@@ -165,23 +165,59 @@
                     
                                 <input type="number" class="form-data" id="update_philhealth"  placeholder="Philhealth #">     
                         
-                                <input type="date" class="form-data" id="update_birthdate">                          
-                          
-                   
+                                <input type="date" class="form-data" id="update_birthdate">    
+                                                      
+                                <input type="text" class="form-data" id="update_position"  readonly>
+                                
                                 <select id="update_gender" class="form-data">
                                     
                                     <option value='male'>Male</option>
                                     <option value='female'>Female</option>
                                 </select>              
                         
+                               
+                               
+                                <input type="text" class="form-data" id="timein_am"  readonly>
+                                <input type="text" class="form-data" id="timeout_am"  readonly>
+                         
+                                  
+                                <input type="text" class="form-data" id="timein_pm"  readonly>
+                                <input type="text" class="form-data" id="timeout_pm"  readonly>
 
-                          
-                            
-                                <select id='update_position' class="form-data">
-                                
-                                    <option selected id="position_val"></option>
-                                      <?php 
-                                    // Fetch position
+                               
+                        
+                        <div class="modal-footer">
+                            <input type="hidden" id="txt_userid" value="0">
+                            <button type="button" class="btn btn-success btn-sm" id="btn_update_edit">Update</button>
+                            <button type="button" class="btn btn-success btn-sm" id="btn_save_edit">Save</button>
+                            <button type="button" onclick="resetModal()" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>      
+            </div>
+
+
+              <!-- updatePosition and Schedule -->
+            <div id="changeModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Update Position and Schedule</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+
+                      
+                        <select id="position_val" class="form-data">
+                                <option value=""> Select Position   </option>
+
+                                    <?php 
+                                    // Fetch position 
+                                    
                                    $sql = "SELECT * FROM position";
                                     $position_data = mysqli_query($conn,$sql);
                                     while($row = mysqli_fetch_assoc($position_data) ){
@@ -189,18 +225,17 @@
                                         $position = $row['position'];
                                         
                                         // Option
+                                
                                         echo "<option value='".$id."' >".$position."</option>";
-                                    }
-                                    ?>
-                                                                        
-                                </select>              
-                          
+                                    } 
+                                   
 
-                           
-                                    
-                            
+                                    ?>
+                                     </select> 
+                                       
+                               
                          
-                                <select id="update_schedule_am" name="schedule_am" class="form-data">
+                                <select id="update_schedule_am" class="form-data">
                                 
                                     <option value="">- Select Schedule for AM-</option>
                                     <?php 
@@ -218,10 +253,8 @@
                                     ?>
                                                                         
                                 </select>              
-                    
+                              
 
-                 
-                          
                                 <select id="update_schedule_pm" name="schedule_pm" class="form-data">
                                 
                                     <option value="">- Select Schedule for PM-</option>
@@ -240,24 +273,26 @@
                                     ?>
                                                                         
                                 </select>              
-                        
+                              
 
-
-                            
                         
                         <div class="modal-footer">
-                            <input type="hidden" id="txt_userid" value="0">
-                            <button type="button" class="btn btn-success btn-sm" id="btn_update_edit">Update</button>
-                            <button type="button" class="btn btn-success btn-sm" id="btn_save_edit">Save</button>
+                            <input type="hidden" id="txt_id" value="0">
+                            <button type="button" class="btn btn-success btn-sm" id="btn_update_change">Update</button>
                             <button type="button" onclick="resetModal()" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
                         </div>
                     </div>
 
                 </div>
-            </div>                           
+            </div>      
+                               
+
+
 
       <script>
         //reset modal
+
+        
         function resetModal (){
                 $('#firstname').val('');
                 $('#lastname').val('');
@@ -265,10 +300,18 @@
                 $('#birthdate').val('');
                 $('#contact').val('');
                 $('#gender').val('');
-                $('#position').val('');
+                $('#position_val').val('');
                 $('#btn_update').hide();
                 $('#btn_save').show();
                 $('#schedule_am').val('');
                 $('#schedule_pm').val('');
   }
+
+        function resetchangeModal (){
+                        $('#position').val('');
+                        $('#schedule_am').val('');
+                        $('#schedule_pm').val('');
+        }
+
+        
       </script>

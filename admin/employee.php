@@ -98,10 +98,7 @@
                 <th>Employee ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Address</th> 
-                <th>Birthdate</th>
                 <th>Contact</th>
-                <th>Gender</th>
                 <th>Action</th>
                   
             </tr>
