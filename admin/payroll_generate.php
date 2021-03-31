@@ -133,8 +133,18 @@ if (isset($_POST['request'])) {
     while($fetch = $query->fetch_array()){
         $empid = $fetch['emp_id'];
 
+        //overtime
+         $ovQuery = "SELECT e.employee_id , e.position_id,p.rate,o.hours from employees e 
+         LEFT JOIN position p ON e.position_id = p.id 
+         INNER JOIN overtime o ON e.employee_id = o.emp_id AND date BETWEEN '$from' AND '$to' GROUP BY o.emp_id";
+         $ovAdd = $conn->query($ovQuery);
+         $ov = $ovAdd->fetch_assoc();
+         $ovRate = $ov['rate'] * 0.25;
+         $total_ov = $ovRate * $ov['hours'];
+
         //cash advance
-         $caQuery= "SELECT SUM(amount) AS 'Amount' FROM cashadvance WHERE emp_id = '$empid' GROUP BY emp_id";
+         $caQuery= "SELECT SUM(amount) AS 'Amount' FROM cashadvance WHERE emp_id = '$empid' AND date_ca 
+         BETWEEN '$from' AND '$to' GROUP BY emp_id ";
          $caDeductions = $conn->query($caQuery);
          $ca = $caDeductions->fetch_assoc();
          $cashadbans = $ca['Amount'];
@@ -145,7 +155,7 @@ if (isset($_POST['request'])) {
          $empDeduc = $empDeductions->fetch_assoc();
          $total_deductions = $empDeduc['amount'] + $ca['Amount'];
          //$netPay = $fetch['Gross'] - $empDeduc['amount'];
-         $gross = $fetch['Gross'];
+         $gross = $fetch['Gross'] + $total_ov;
          $netPay = $gross - $total_deductions;
 
          

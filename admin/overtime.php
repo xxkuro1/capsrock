@@ -21,7 +21,7 @@
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/cashadvance.js"></script>
+    <script src="js/overtime.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href='DataTables/datatables.min.css' rel='stylesheet' type='text/css'>
     <script src="./js/datatables.net/js/jquery.dataTables.min.js" defer></script>
@@ -86,21 +86,20 @@
 
         <div class="container-fluid">
           
-            <h1 class="mt-4">Cash Advance</h1>
-            <button type="button" class="btn btn-info btn-lg"  data-toggle="modal" data-target="#cashadvanceModal">Add</button>
+            <h1 class="mt-4">Overtime</h1>
+            <button type="button" class="btn btn-info btn-lg"  data-toggle="modal" data-target="#overtimeModal">Add</button>
          
         </div>
         &nbsp;
         
-        <table id='cashadvanceTable' class='display dataTable' width='100%'>
+        <table id='overtimeTable' class='display dataTable' width='100%'>
           <thead>
             <tr>
-                <th>Date</th>
                 <th>Employee ID</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Amount</th>
-                <th>Tools</th>
+                <th>Date</th>
+                <th>Hours</th>
+                <th>Action</th>
+                  
             </tr>
 
           </thead>
@@ -134,7 +133,7 @@
       }
     
         </script>
-        <?php include('cashadvanceModal.php'); ?>
+        <?php include('overtimeModal.php'); ?>
         
 </body>
 </html> 

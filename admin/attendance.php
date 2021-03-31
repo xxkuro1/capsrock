@@ -58,6 +58,7 @@
     <a class="dropdown-item" href="payroll.php">Payroll List</a>
     <a class="dropdown-item" href="deductions.php">Deductions</a>
     <a class="dropdown-item" href="cashadvance.php">Cash Advance</a>
+    <a class="dropdown-item" href="overtime.php">Overtime</a>
 </div>
 </div>
  
